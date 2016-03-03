@@ -38,7 +38,7 @@ class Elasticsearch14 < Formula
       s.sub!(%r{#\s*path\.plugins: /path/to.+$}, "path.plugins: #{var}/lib/elasticsearch/plugins")
 
       # 3. Bind to loopback IP for laptops roaming different networks
-      s.gsub!(/#\s*network\.host\: [^\n]+/, "network.host: 124.0.0.1")
+      s.gsub!(/#\s*network\.host\: [^\n]+/, "network.host: 127.0.0.1")
     end
 
     inreplace "#{bin}/elasticsearch.in.sh" do |s|
