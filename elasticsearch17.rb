@@ -1,14 +1,15 @@
-class Elasticsearch14 < Formula
+class Elasticsearch17 < Formula
   desc "Distributed search & analytics engine"
   homepage "https://www.elastic.co/products/elasticsearch"
-  url "https://download.elastic.co/elasticsearch/elasticsearch/elasticsearch-1.4.3.tar.gz"
-  sha256 "28c1f94de41c90fd1c643af1f4cec4d4bbfeaa3634d2e757fa512b7e49403f68"
+  url "https://download.elastic.co/elasticsearch/elasticsearch/elasticsearch-1.7.6.tar.gz"
+  sha256 "78affc30353730ec245dad1f17de242a4ad12cf808eaa87dd878e1ca10ed77df"
+  revision 1
 
   bottle :unneeded
 
-  depends_on :java => "1.4+"
+  depends_on :java => "1.7+"
 
-  conflicts_with "elasticsearch17", :because => "You can only install one version of ElasticSearch"
+  conflicts_with "rhoggsugarcrm/versions/elasticsearch14", :because => "You can only install one version of ElasticSearch"
 
   def cluster_name
     "elasticsearch_#{ENV["USER"]}"
@@ -52,7 +53,7 @@ class Elasticsearch14 < Formula
 
     inreplace "#{bin}/plugin" do |s|
       # Add the proper ES_CLASSPATH configuration
-      s.sub!(/SCRIPT="\$0"/, %(SCRIPT="$0"\nES_CLASSPATH=#{libexec}))
+      s.sub!(/SCRIPT="\$0"/, %Q(SCRIPT="$0"\nES_CLASSPATH=#{libexec}))
       # Replace paths to use libexec instead of lib
       s.gsub!(%r{\$ES_HOME/lib/}, "$ES_CLASSPATH/")
     end
@@ -74,7 +75,7 @@ class Elasticsearch14 < Formula
     EOS
   end
 
-  plist_options :manual => "elasticsearch --config=#{HOMEBREW_PREFIX}/opt/elasticsearch14/config/elasticsearch.yml"
+  plist_options :manual => "elasticsearch --config=#{HOMEBREW_PREFIX}/opt/elasticsearch17/config/elasticsearch.yml"
 
   def plist; <<-EOS.undent
       <?xml version="1.0" encoding="UTF-8"?>
@@ -87,7 +88,7 @@ class Elasticsearch14 < Formula
           <string>#{plist_name}</string>
           <key>ProgramArguments</key>
           <array>
-            <string>#{HOMEBREW_PREFIX}/bin/elasticsearch</string>
+            <string>#{opt_bin}/elasticsearch</string>
             <string>--config=#{prefix}/config/elasticsearch.yml</string>
           </array>
           <key>EnvironmentVariables</key>
@@ -100,9 +101,9 @@ class Elasticsearch14 < Formula
           <key>WorkingDirectory</key>
           <string>#{var}</string>
           <key>StandardErrorPath</key>
-          <string>#{var}/log/elasticsearch14.log</string>
+          <string>#{var}/log/#{name}.log</string>
           <key>StandardOutPath</key>
-          <string>#{var}/log/elasticsearch14.log</string>
+          <string>#{var}/log/#{name}.log</string>
         </dict>
       </plist>
     EOS
