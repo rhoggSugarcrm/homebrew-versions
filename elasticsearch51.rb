@@ -8,6 +8,9 @@ class Elasticsearch51 < Formula
 
   depends_on :java => "1.8+"
 
+  conflicts_with "rhoggsugarcrm/versions/elasticsearch14", :because => "You can only install one version of ElasticSearch"
+  conflicts_with "rhoggsugarcrm/versions/elasticsearch17", :because => "You can only install one version of ElasticSearch"
+
   def cluster_name
     "elasticsearch_#{ENV["USER"]}"
   end
