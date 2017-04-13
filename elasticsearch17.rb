@@ -9,6 +9,7 @@ class Elasticsearch17 < Formula
 
   depends_on :java => "1.7+"
 
+  conflicts_with "elasticsearch", :because => "You can only install one version of ElasticSearch"
   conflicts_with "rhoggsugarcrm/versions/elasticsearch14", :because => "You can only install one version of ElasticSearch"
   conflicts_with "rhoggsugarcrm/versions/elasticsearch51", :because => "You can only install one version of ElasticSearch"
 

@@ -8,6 +8,7 @@ class Elasticsearch51 < Formula
 
   depends_on :java => "1.8+"
 
+  conflicts_with "elasticsearch", :because => "You can only install one version of ElasticSearch"
   conflicts_with "rhoggsugarcrm/versions/elasticsearch14", :because => "You can only install one version of ElasticSearch"
   conflicts_with "rhoggsugarcrm/versions/elasticsearch17", :because => "You can only install one version of ElasticSearch"
 
@@ -16,15 +17,6 @@ class Elasticsearch51 < Formula
   end
 
   def install
-    if build.head?
-      # Build the package from source
-      system "gradle", "clean", ":distribution:tar:assemble"
-      # Extract the package to the tar directory
-      mkdir "tar"
-      cd "tar"
-      system "tar", "--strip-components=1", "-xf", Dir["../distribution/tar/build/distributions/elasticsearch-*.tar.gz"].first
-    end
-
     # Remove Windows files
     rm_f Dir["bin/*.bat"]
     rm_f Dir["bin/*.exe"]
