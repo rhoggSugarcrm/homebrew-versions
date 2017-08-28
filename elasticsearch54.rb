@@ -1,21 +1,21 @@
-class Elasticsearch51 < Formula
+class Elasticsearch54 < Formula
   desc "Distributed search & analytics engine"
   homepage "https://www.elastic.co/products/elasticsearch"
-  url "https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-5.1.2.tar.gz"
-  sha256 "74d752f9a8b46898d306ad169b72f328e17215c0909149e156a576089ef11c42"
+  url "https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-5.4.3.tar.gz"
+  sha256 "0ceaf6a2243e9a6f3519dce62991ccab09a44326d6899688cd09422b8c31c68f"
 
   bottle :unneeded
 
   depends_on :java => "1.8+"
 
-  conflicts_with "elasticsearch", :because => "You can only install one version of ElasticSearch"
-  conflicts_with "rhoggsugarcrm/versions/elasticsearch14", :because => "You can only install one version of ElasticSearch"
-  conflicts_with "rhoggsugarcrm/versions/elasticsearch17", :because => "You can only install one version of ElasticSearch"
-  conflicts_with "rhoggsugarcrm/versions/elasticsearch54", :because => "You can only install one version of ElasticSearch"
-
   def cluster_name
     "elasticsearch_#{ENV["USER"]}"
   end
+
+  conflicts_with "elasticsearch", :because => "You can only install one version of ElasticSearch"
+  conflicts_with "rhoggsugarcrm/versions/elasticsearch14", :because => "You can only install one version of ElasticSearch"
+  conflicts_with "rhoggsugarcrm/versions/elasticsaerch17", :because => "You can only install one version of ElasticSearch"
+  conflicts_with "rhoggsugarcrm/versions/elasticsearch51", :because => "You can only install one version of ElasticSearch"
 
   def install
     # Remove Windows files
@@ -89,7 +89,7 @@ class Elasticsearch51 < Formula
           <string>#{plist_name}</string>
           <key>ProgramArguments</key>
           <array>
-            <string>#{HOMEBREW_PREFIX}/bin/elasticsearch</string>
+            <string>#{opt_bin}/elasticsearch</string>
           </array>
           <key>EnvironmentVariables</key>
           <dict>
