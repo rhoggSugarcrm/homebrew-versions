@@ -1,6 +1,6 @@
 # Homebrew-versions
 
-This tap only contains different versions of ElasticSearch, at the moment.
+This tap only contains different versions of ElasticSearch and PHP, at the moment.
 
 ## License
-Code is under the [BSD 2 Clause (NetBSD) license](https://github.com/rhoggSugarcrm/homebrew-versions/tree/master/LICENSE).
+Code is under the [BSD 2 Clause license](https://github.com/rhoggSugarcrm/homebrew-versions/tree/master/LICENSE).
