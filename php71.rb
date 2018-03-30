@@ -1,14 +1,13 @@
 class Php71 < Formula
   desc "General-purpose scripting language"
   homepage "https://secure.php.net/"
-  url "https://php.net/get/php-7.1.7.tar.xz/from/this/mirror"
-  sha256 "0d42089729be7b2bb0308cbe189c2782f9cb4b07078c8a235495be5874fff729"
+  url "https://php.net/get/php-7.1.15.tar.xz/from/this/mirror"
+  sha256 "0e17192fb43532e4ebaa190ecec9c7e59deea7dadb7dab67b19c2081a68bd817"
 
   depends_on "httpd" => [:build, :test]
   depends_on "pkg-config" => :build
   depends_on "apr"
   depends_on "apr-util"
-  depends_on "argon2"
   depends_on "aspell"
   depends_on "curl"
   depends_on "freetds"
@@ -20,7 +19,6 @@ class Php71 < Formula
   depends_on "jpeg"
   depends_on "libpng"
   depends_on "libpq"
-  depends_on "libsodium"
   depends_on "libtool"
   depends_on "libzip"
   depends_on "mcrypt"
@@ -57,6 +55,9 @@ class Php71 < Formula
     ENV.append "CPPFLAGS", "-DU_USING_ICU_NAMESPACE=1"
 
     config_path = etc/"php/#{php_version}"
+    # Prevent system pear config from inhibitting pear install
+    (config_path/"pear.conf").delete if (config_path/"pear.conf").exist?
+
     # Prevent homebrew from harcoding path to sed shim in phpize script
     ENV["lt_cv_path_SED"] = "sed"
 
@@ -111,7 +112,6 @@ class Php71 < Formula
       --with-mysqli=mysqlnd
       --with-ndbm
       --with-openssl=#{Formula["openssl"].opt_prefix}
-      --with-password-argon2=#{Formula["argon2"].opt_prefix}
       --with-pdo-dblib=#{Formula["freetds"].opt_prefix}
       --with-pdo-mysql=mysqlnd
       --with-pdo-odbc=unixODBC,#{Formula["unixodbc"].opt_prefix}
@@ -120,7 +120,6 @@ class Php71 < Formula
       --with-pic
       --with-png-dir=#{Formula["libpng"].opt_prefix}
       --with-pspell=#{Formula["aspell"].opt_prefix}
-      --with-sodium=#{Formula["libsodium"].opt_prefix}
       --with-unixODBC=#{Formula["unixodbc"].opt_prefix}
       --with-webp-dir=#{Formula["webp"].opt_prefix}
       --with-xmlrpc
