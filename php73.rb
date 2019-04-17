@@ -1,8 +1,8 @@
 class Php73 < Formula
   desc "General-purpose scripting language"
   homepage "https://secure.php.net/"
-  url "https://php.net/get/php-7.3.2.tar.xz/from/this/mirror"
-  sha256 "010b868b4456644ae227d05ad236c8b0a1f57dc6320e7e5ad75e86c5baf0a9a8"
+  url "https://php.net/get/php-7.3.4.tar.xz/from/this/mirror"
+  sha256 "6fe79fa1f8655f98ef6708cde8751299796d6c1e225081011f4104625b923b83"
 
   depends_on "httpd" => [:build, :test]
   depends_on "pkg-config" => :build
